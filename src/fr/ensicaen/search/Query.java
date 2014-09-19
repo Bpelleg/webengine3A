@@ -55,7 +55,9 @@ public class Query {
 
     public float computeSaltonCoefficient(String document) {
         float denominator, numerator;
-        return 5f;
+
+
+        //return numerator / denominator;
     }
 
     @Override
