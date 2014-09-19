@@ -11,9 +11,9 @@
 
 package fr.ensicaen.search;
 
-import java.util.Scanner;
+import index.Index;
 
-import fr.ensicaen.stub.Index;
+import java.util.Scanner;
 
 /**
  * This file is used to understand the query of the user.
@@ -26,7 +26,7 @@ public class Search {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter your query: ");
-        Query query = new Query(sc.next(), index);
+        Query query = new Query(sc.nextLine(), index);
         System.out.println("Query: " + query);
         System.out.println("Salton coefficient (Cauchemar.txt): "
                 + query.computeSaltonCoefficient("Cauchemar.txt"));

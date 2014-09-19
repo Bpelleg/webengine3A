@@ -10,7 +10,11 @@ public class Index {
 
 
 		public Index(){
-			
+			index = new HashMap<String, Map<String, Float>>();
+
+			index.put("Cauchemar.txt", new HashMap<String, Float>());
+			index.get("Cauchemar.txt").put("toujours", 2.11f);
+			index.get("Cauchemar.txt").put("jamais", 5.7f);
 		}
 
 
@@ -22,12 +26,12 @@ public class Index {
 		public int getNbDoc() {
 			return nbDoc;
 		}
-		
-	
+
+
 		public void setIndex(Map<String, Map<String, Float>> index) {
 			this.index = index;
 		}
-		
+
 		public void setNbDoc(int nbDoc){
 			this.nbDoc=nbDoc;
 		}
