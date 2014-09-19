@@ -11,6 +11,8 @@
 
 package fr.ensicaen.search;
 
+import index.Index;
+
 import java.util.Map;
 
 /**
