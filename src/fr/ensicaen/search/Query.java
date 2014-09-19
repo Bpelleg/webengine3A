@@ -13,6 +13,8 @@ package fr.ensicaen.search;
 
 import java.util.Map;
 
+import fr.ensicaen.stub.Index;
+
 /**
  * This file is used to represent the query of the user.
  * @author Jean MARGUERITE <jean.marguerite@ecole.ensicaen.fr>
@@ -23,12 +25,13 @@ public class Query {
     private Map<String, Boolean> mVector;
     private Index mIndex;
 
-    public Query(String text) {
+    public Query(String text, Index index) {
         mText = text;
+        mIndex = index;
     }
 
-    public void computeSaltonCoefficient() {
-
+    public float computeSaltonCoefficient(String document) {
+        return 5f;
     }
 
     @Override
