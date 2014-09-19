@@ -75,4 +75,9 @@ public class IndexHandler {
 		i.setNbDoc(nbDoc);
 		return i;
 	}
+	
+	public void setIndex(Index index){
+		this.index=index.getIndex();
+		this.nbDoc=index.getNbDoc();
+	}
 }
