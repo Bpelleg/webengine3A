@@ -1,11 +1,11 @@
-package indexTest;
+package fr.ensicaen.indexTest;
 
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import index.IndexFactory;
+import fr.ensicaen.index.IndexFactory;
 
 import org.junit.Test;
 

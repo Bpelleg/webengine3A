@@ -11,7 +11,7 @@
 
 package fr.ensicaen.search;
 
-import index.Index;
+import fr.ensicaen.index.Index;
 
 import java.util.Scanner;
 

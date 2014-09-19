@@ -1,4 +1,4 @@
-package index;
+package fr.ensicaen.index;
 
 import java.util.HashMap;
 import java.util.Map;
