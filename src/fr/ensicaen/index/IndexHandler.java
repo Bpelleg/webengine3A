@@ -1,7 +1,7 @@
 /**
  * 
  */
-package index;
+package fr.ensicaen.index;
 
 import java.text.ParseException;
 import java.util.HashMap;

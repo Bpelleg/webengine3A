@@ -1,7 +1,7 @@
 /**
  * 
  */
-package index;
+package fr.ensicaen.index;
 
 import java.util.Arrays;
 import java.util.HashMap;
