@@ -16,6 +16,7 @@ public class IndexHandler {
 	 * data representation doc->mot->score
 	 */
 	private Map<String,Map<String,Float>> index;
+	int nbDoc=0;
 	
 	/**
 	 * default constructor
@@ -52,6 +53,7 @@ public class IndexHandler {
 	
 	public void initializeFromString(String strIndex) throws ParseException{
 		String[] lines=strIndex.split("\n");
+		nbDoc=lines.length;
 		for(String line:lines){
 			String[] lineParts=line.split("\t");
 			if(lineParts.length!=3){
@@ -65,5 +67,12 @@ public class IndexHandler {
 			}
 			index.get(doc).put(word,score);
 		}
+	}
+	
+	public Index getIndex(){
+		Index i=new Index();
+		i.setIndex(index);
+		i.setNbDoc(nbDoc);
+		return i;
 	}
 }
