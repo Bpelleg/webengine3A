@@ -1,4 +1,4 @@
-package fr.ensicaen.index;
+package fr.ensicaen.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
