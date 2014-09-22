@@ -1,6 +1,5 @@
 package fr.ensicaen.index;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -10,11 +9,6 @@ public class Index {
 
 
 		public Index(){
-			index = new HashMap<String, Map<String, Float>>();
-
-			index.put("Cauchemar.txt", new HashMap<String, Float>());
-			index.get("Cauchemar.txt").put("toujours", 2.11f);
-			index.get("Cauchemar.txt").put("jamais", 5.7f);
 		}
 
 

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package fr.ensicaen.index;
 
@@ -17,16 +17,16 @@ public class IndexHandler {
 	 */
 	private Map<String,Map<String,Float>> index;
 	int nbDoc=0;
-	
+
 	/**
 	 * default constructor
 	 */
 	public IndexHandler(){
 		index=new HashMap<String,Map<String,Float>>();
 	}
-	
+
 	/**
-	 * constructor that initialize the index from the given String 
+	 * constructor that initialize the index from the given String
 	 * @param strIndex
 	 */
 	public IndexHandler(String strIndex){
@@ -37,7 +37,7 @@ public class IndexHandler {
 			//TODO handle this exception
 		}
 	}
-	
+
 	@Override
 	public String toString(){
 		String output="";
@@ -50,7 +50,7 @@ public class IndexHandler {
 		}
 		return output;
 	}
-	
+
 	public void initializeFromString(String strIndex) throws ParseException{
 		String[] lines=strIndex.split("\n");
 		nbDoc=lines.length;
@@ -68,14 +68,14 @@ public class IndexHandler {
 			index.get(doc).put(word,score);
 		}
 	}
-	
+
 	public Index getIndex(){
 		Index i=new Index();
 		i.setIndex(index);
 		i.setNbDoc(nbDoc);
 		return i;
 	}
-	
+
 	public void setIndex(Index index){
 		this.index=index.getIndex();
 		this.nbDoc=index.getNbDoc();

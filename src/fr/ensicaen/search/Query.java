@@ -11,10 +11,10 @@
 
 package fr.ensicaen.search;
 
-import fr.ensicaen.index.Index;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import fr.ensicaen.index.Index;
 
 /**
  * This file is used to represent the query of the user.
@@ -22,18 +22,15 @@ import java.util.Map;
  * @author Baptiste PELLEGRINI <baptiste.pellegrini@ecole.ensicaen.fr>
  */
 public class Query {
-    private String mText;
+    private String mTextQuery;
     private Map<String, Boolean> mVector;
     private Index mIndex;
 
-    public Query(String text, Index index) {
-        mText = text;
+    public Query(Index index) {
         mIndex = index;
-        buildVector();
-        browseQuery();
     }
 
-    private void buildVector() {
+    public void buildVector() {
         mVector = new HashMap<String, Boolean>();
 
         for (Map.Entry<String, Map<String, Float>> document : mIndex.getIndex()
@@ -45,22 +42,51 @@ public class Query {
         }
     }
 
-    private void browseQuery() {
-        for (String word : mText.split("[\\p{Punct}\\s]+")) {
+    public void browseQuery(String textQuery) {
+        mTextQuery = textQuery;
+
+        for (String word : mTextQuery.split("[\\p{Punct}\\s]+")) {
             if (mVector.containsKey(word)) {
                 mVector.replace(word, true);
             }
         }
     }
 
-    public float computeSaltonCoefficient(String document) {
+    public float computeSaltonCoefficient(String textQuery, String document) {
         float denominator, numerator;
+
+        buildVector();
+        browseQuery(textQuery);
+
+        numerator = computeNumerator(document);
+        denominator = computeDenominator(document);
+
+        return numerator / denominator;
+    }
+
+    private float computeNumerator(String document) {
+        float sum;
+
+        for (Map.Entry<String, Float> word : mIndex.getIndex().get(document)
+                .entrySet()) {
+            System.out.println(word.getValue());
+        }
+
+        return 0f;
+    }
+
+    private float computeDenominator(String document) {
+        float sum;
 
         return 5f;
     }
 
     @Override
     public String toString() {
-        return mText;
+        return mTextQuery;
+    }
+
+    public Map<String, Boolean> getVector() {
+        return mVector;
     }
 }
