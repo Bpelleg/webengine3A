@@ -1,4 +1,4 @@
-package fr.ensicaen.indexTest;
+package fr.ensicaen.index;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,7 @@ import fr.ensicaen.index.IndexFactory;
 
 import org.junit.Test;
 
-public class IndexFactoryTest {
+public class TestIndexFactory {
 	String text=" a b  il Bonjour comment ça ça va ?\n il il fait beau aujourd'hui  huio  \n\t\rHello";
 
 	@Test

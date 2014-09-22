@@ -12,7 +12,7 @@
 package fr.ensicaen.search;
 
 import static org.junit.Assert.assertEquals;
-import index.Index;
+import fr.ensicaen.index.Index;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
