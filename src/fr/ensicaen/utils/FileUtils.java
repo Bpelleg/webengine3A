@@ -47,7 +47,7 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static String readWholeFile(String path) throws IOException{
-		return new String(Files.readAllBytes(Paths.get("file")), StandardCharsets.ISO_8859_1);
+		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.ISO_8859_1);
 	}
 
 	/**
