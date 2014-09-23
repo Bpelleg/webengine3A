@@ -48,24 +48,8 @@ public class TestQuery {
     }
 
     @Test
-    public void testBuildVector() {
-        mQuery.buildVector();
-        assertEquals(mQuery.getVector().get("matin"), false);
-        assertEquals(mQuery.getVector().get("midi"), false);
-        assertEquals(mQuery.getVector().get("soir"), false);
-    }
-
-    @Test
-    public void testBrowseQuery() {
-        mQuery.buildVector();
-        mQuery.browseQuery("matin midi");
-        assertEquals(mQuery.getVector().get("matin"), true);
-        assertEquals(mQuery.getVector().get("midi"), true);
-        assertEquals(mQuery.getVector().get("soir"), false);
-    }
-
-    @Test
     public void testComputeSaltonCoefficient() {
-        mQuery.computeSaltonCoefficient("le dernier matin", "test.txt");
+        assertEquals(0.49, mQuery.computeSaltonCoefficient("le dernier matin",
+                "test2.txt"), 0.001);
     }
 }
