@@ -23,12 +23,16 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public static List<String> readFileLines(String path,String format) throws IOException{
+		return readFileLines(new File(path),format);
+	}
+	
+	public static List<String> readFileLines(File file,String format) throws IOException{
 		String line;
 		BufferedReader reader=null;
 		List<String> lines=new ArrayList<String>();
 		try{
 			reader  = new BufferedReader(
-					new InputStreamReader(new FileInputStream(new File(path)),format));
+					new InputStreamReader(new FileInputStream(file),format));
 			while((line=reader.readLine())!=null){
 				lines.add(line);
 			}
@@ -46,8 +50,12 @@ public class FileUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String readWholeFile(String path) throws IOException{
+	public static String readWholeFileISO(String path) throws IOException{
 		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.ISO_8859_1);
+	}
+	
+	public static String readWholeFileUTF8(String path) throws IOException{
+		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
 	}
 
 	/**

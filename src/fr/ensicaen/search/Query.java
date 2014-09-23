@@ -33,7 +33,7 @@ public class Query {
     public void buildVector() {
         mVector = new HashMap<String, Boolean>();
 
-        for (Map.Entry<String, Map<String, Float>> document : mIndex.getIndex()
+        for (Map.Entry<String, Map<String, Float>> document : mIndex.getIndexMap()
                 .entrySet()) {
             for (Map.Entry<String, Float> word : document.getValue()
                     .entrySet()) {
@@ -67,7 +67,7 @@ public class Query {
     private float computeNumerator(String document) {
         float sum;
 
-        for (Map.Entry<String, Float> word : mIndex.getIndex().get(document)
+        for (Map.Entry<String, Float> word : mIndex.getIndexMap().get(document)
                 .entrySet()) {
             System.out.println(word.getValue());
         }

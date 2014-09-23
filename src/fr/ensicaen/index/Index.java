@@ -12,7 +12,7 @@ public class Index {
 		}
 
 
-		public Map<String, Map<String, Float>> getIndex() {
+		public Map<String, Map<String, Float>> getIndexMap() {
 			return index;
 		}
 
@@ -29,4 +29,5 @@ public class Index {
 		public void setNbDoc(int nbDoc){
 			this.nbDoc=nbDoc;
 		}
+		
 }

@@ -22,7 +22,7 @@ public class IndexFactory {
 
 	/**
 	 * 
-	 * @param filesContents
+	 * @param filesContents Map : name -> content
 	 */
 	
 	public Index buildIndex(Map<String,String> files){
@@ -56,8 +56,6 @@ public class IndexFactory {
 			// at this step the scores are the number of words' occurences in the file
 		indexMap.put(doc, docIndex);
 		}
-		System.out.println(indexMap);
-		System.out.println(wordOccurencesInFiles);
 		//computes the TF-IDFs
 		for(String doc:indexMap.keySet()){
 			Map<String,Float> docMap=indexMap.get(doc);
@@ -66,7 +64,6 @@ public class IndexFactory {
 				docMap.put(word, Float.valueOf(tfidf));
 			}
 		}
-		System.out.println(indexMap);
 		Index index=new Index();
 		index.setIndex(indexMap);
 		index.setNbDoc(nbFiles);

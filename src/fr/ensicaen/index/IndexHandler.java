@@ -38,15 +38,14 @@ public class IndexHandler {
 		}
 	}
 
-	@Override
-	public String toString(){
+	public String getStrIndex(){
 		String output="";
 		for (String doc : index.keySet()) {
-		    Map<String,Float> docAndScore=index.get(doc);
-		    for(String word : docAndScore.keySet()){
-		    	Float score=docAndScore.get(word);
-		    	output+=doc+"\t"+word+"\t"+score.toString()+"\n";
-		    }
+			Map<String,Float> docAndScore=index.get(doc);
+			for(String word : docAndScore.keySet()){
+				Float score=docAndScore.get(word);
+				output+=doc+"\t"+word+"\t"+score.toString()+"\n";
+			}
 		}
 		return output;
 	}
@@ -77,7 +76,7 @@ public class IndexHandler {
 	}
 
 	public void setIndex(Index index){
-		this.index=index.getIndex();
+		this.index=index.getIndexMap();
 		this.nbDoc=index.getNbDoc();
 	}
 }

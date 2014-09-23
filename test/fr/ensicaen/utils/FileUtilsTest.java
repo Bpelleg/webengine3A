@@ -17,7 +17,7 @@ public class FileUtilsTest {
 	public void test() {
 		String fileContent;
 		try {
-			fileContent = FileUtils.readWholeFile("./corpus/A_la_promenade.txt");
+			fileContent = FileUtils.readWholeFileISO("./corpus/Ecoutez_la_chanson_bien_douce.txt");
 			System.out.println(fileContent);
 			FileUtils.writeFile("./testFiles/test1.txt", fileContent,StandardCharsets.UTF_8.displayName());
 			List<String> lines=FileUtils.readFileLines("./corpus/A_la_promenade.txt", StandardCharsets.ISO_8859_1.displayName());
