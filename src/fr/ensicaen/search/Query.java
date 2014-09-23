@@ -11,12 +11,16 @@
 
 package fr.ensicaen.search;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import fr.ensicaen.index.Index;
+import fr.ensicaen.utils.FileUtils;
+import fr.ensicaen.utils.SaltonUtils;
 
 /**
  * This file is used to represent the query of the user.
@@ -27,8 +31,16 @@ public class Query {
     private Index mIndex;
     private Set<String> mVector = new HashSet<>();
     private String mTextQuery;
+    private Map<String, Float> mPartial;
 
     public Query(Index index) {
+        try {
+            mPartial = SaltonUtils.getSaltonCoefFromString(
+                    FileUtils.readWholeFileUTF8("./index/salton.txt"));
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+
         mIndex = index;
     }
 
@@ -71,6 +83,7 @@ public class Query {
 
     /**
      * Build a vector with only words of the request presents in the index.
+     * TODO Mettre des valeurs plus réalistes pour le vecteur de la requête.
      */
     private void buildVector() {
         for (Map.Entry<String, Map<String, Float>> document : mIndex.getIndexMap()
@@ -110,7 +123,8 @@ public class Query {
     private float computeDenominator(String document) {
         float sum = 0f;
 
-        sum += mVector.size();
+        sum += mVector.size() * mVector.size();
+        sum *= mPartial.get(document);
 
         return (float) Math.sqrt(sum);
     }

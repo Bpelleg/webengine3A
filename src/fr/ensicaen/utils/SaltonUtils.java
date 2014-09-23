@@ -20,7 +20,7 @@ public class SaltonUtils {
 		return res;
 	}
 
-	public Map<String,Float> getSaltonCoefFromString(String strSaltons) throws ParseException{
+	public static Map<String,Float> getSaltonCoefFromString(String strSaltons) throws ParseException{
 		String[] lines=strSaltons.split("\n");
 		Map<String,Float> saltonCoefs=new HashMap<String,Float>();
 		for(String line:lines){
