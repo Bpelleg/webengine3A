@@ -12,7 +12,9 @@
 package fr.ensicaen.search;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import fr.ensicaen.index.Index;
 
@@ -22,41 +24,43 @@ import fr.ensicaen.index.Index;
  * @author Baptiste PELLEGRINI <baptiste.pellegrini@ecole.ensicaen.fr>
  */
 public class Query {
-    private String mTextQuery;
-    private Map<String, Boolean> mVector;
     private Index mIndex;
+    private Set<String> mVector = new HashSet<>();
+    private String mTextQuery;
 
     public Query(Index index) {
         mIndex = index;
     }
 
-    public void buildVector() {
-        mVector = new HashMap<String, Boolean>();
+    /**
+     * Returns a map of the indexed documents with the corresponding Salton
+     * coefficient.
+     * @param textQuery Text of the query.
+     * @return Map of the indexed documents.
+     */
+    public Map<String, Float> search(String textQuery) {
+        Map<String, Float> relevantDocument = new HashMap<>();
+
+        mTextQuery = textQuery;
+        buildVector();
 
         for (Map.Entry<String, Map<String, Float>> document : mIndex.getIndexMap()
                 .entrySet()) {
-            for (Map.Entry<String, Float> word : document.getValue()
-                    .entrySet()) {
-                mVector.put(word.getKey(), false);
-            }
+            relevantDocument.put(document.getKey(), computeSaltonCoefficient(
+                    textQuery, document.getKey()));
         }
+
+        return relevantDocument;
     }
 
-    public void browseQuery(String textQuery) {
-        mTextQuery = textQuery;
-
-        for (String word : mTextQuery.split("[\\p{Punct}\\s]+")) {
-            if (mVector.containsKey(word)) {
-                mVector.replace(word, true);
-            }
-        }
-    }
-
+    /**
+     * Computes Salton coefficient of a request and a document.
+     * @param textQuery Text of the query.
+     * @param document Document used.
+     * @return Salton coefficient.
+     */
     public float computeSaltonCoefficient(String textQuery, String document) {
         float denominator, numerator;
-
-        buildVector();
-        browseQuery(textQuery);
 
         numerator = computeNumerator(document);
         denominator = computeDenominator(document);
@@ -64,29 +68,55 @@ public class Query {
         return numerator / denominator;
     }
 
-    private float computeNumerator(String document) {
-        float sum;
 
-        for (Map.Entry<String, Float> word : mIndex.getIndexMap().get(document)
+    /**
+     * Build a vector with only words of the request presents in the index.
+     */
+    private void buildVector() {
+        for (Map.Entry<String, Map<String, Float>> document : mIndex.getIndexMap()
                 .entrySet()) {
-            System.out.println(word.getValue());
+            for (Map.Entry<String, Float> word : document.getValue().entrySet()) {
+                for (String query : mTextQuery.split("[\\p{Punct}\\s]+")) {
+                    if (query.equals(word.getKey())) {
+                        mVector.add(query);
+                    }
+                }
+            }
         }
-
-        return 0f;
     }
 
-    private float computeDenominator(String document) {
-        float sum;
+    /**
+     * Computes numerator of Salton coefficient.
+     * @param document Document used.
+     * @return Numerator of Salton coefficient.
+     */
+    private float computeNumerator(String document) {
+        float sum = 0f;
 
-        return 5f;
+        for (String word : mTextQuery.split("[\\p{Punct}\\s]+")) {
+            if (mIndex.getIndexMap().get(document).containsKey(word)) {
+                sum += mIndex.getIndexMap().get(document).get(word);
+            }
+        }
+
+        return sum;
+    }
+
+    /**
+     * Computes denominator of Salton coefficient.
+     * @param document Document used.
+     * @return Denominator of Salton coefficient.
+     */
+    private float computeDenominator(String document) {
+        float sum = 0f;
+
+        sum += mVector.size();
+
+        return (float) Math.sqrt(sum);
     }
 
     @Override
     public String toString() {
         return mTextQuery;
-    }
-
-    public Map<String, Boolean> getVector() {
-        return mVector;
     }
 }

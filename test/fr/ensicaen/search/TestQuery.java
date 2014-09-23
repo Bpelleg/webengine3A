@@ -11,8 +11,6 @@
 
 package fr.ensicaen.search;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,24 +46,11 @@ public class TestQuery {
     }
 
     @Test
-    public void testBuildVector() {
-        mQuery.buildVector();
-        assertEquals(mQuery.getVector().get("matin"), false);
-        assertEquals(mQuery.getVector().get("midi"), false);
-        assertEquals(mQuery.getVector().get("soir"), false);
-    }
+    public void testSearch() {
+        Map<String, Float> relevantDocuments = mQuery.search("le dernier matin");
 
-    @Test
-    public void testBrowseQuery() {
-        mQuery.buildVector();
-        mQuery.browseQuery("matin midi");
-        assertEquals(mQuery.getVector().get("matin"), true);
-        assertEquals(mQuery.getVector().get("midi"), true);
-        assertEquals(mQuery.getVector().get("soir"), false);
-    }
-
-    @Test
-    public void testComputeSaltonCoefficient() {
-        mQuery.computeSaltonCoefficient("le dernier matin", "test.txt");
+        for (Map.Entry<String, Float> document : relevantDocuments.entrySet()) {
+            System.out.println(document.getKey() + " : " + document.getValue());
+        }
     }
 }
