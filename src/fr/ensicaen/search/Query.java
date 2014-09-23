@@ -11,6 +11,7 @@
 
 package fr.ensicaen.search;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -24,11 +25,32 @@ import fr.ensicaen.index.Index;
  */
 public class Query {
     private Index mIndex;
-    private Set<String> mVector = new HashSet<String>();
+    private Set<String> mVector = new HashSet<>();
     private String mTextQuery;
 
     public Query(Index index) {
         mIndex = index;
+    }
+
+    /**
+     * Returns a map of the indexed documents with the corresponding Salton
+     * coefficient.
+     * @param textQuery Text of the query.
+     * @return Map of the indexed documents.
+     */
+    public Map<String, Float> search(String textQuery) {
+        Map<String, Float> relevantDocument = new HashMap<>();
+
+        mTextQuery = textQuery;
+        buildVector();
+
+        for (Map.Entry<String, Map<String, Float>> document : mIndex.getIndex()
+                .entrySet()) {
+            relevantDocument.put(document.getKey(), computeSaltonCoefficient(
+                    textQuery, document.getKey()));
+        }
+
+        return relevantDocument;
     }
 
     /**
@@ -39,9 +61,6 @@ public class Query {
      */
     public float computeSaltonCoefficient(String textQuery, String document) {
         float denominator, numerator;
-
-        mTextQuery = textQuery;
-        buildVector();
 
         numerator = computeNumerator(document);
         denominator = computeDenominator(document);

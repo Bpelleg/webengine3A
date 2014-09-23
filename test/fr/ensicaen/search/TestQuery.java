@@ -11,8 +11,6 @@
 
 package fr.ensicaen.search;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,8 +46,11 @@ public class TestQuery {
     }
 
     @Test
-    public void testComputeSaltonCoefficient() {
-        assertEquals(0.49, mQuery.computeSaltonCoefficient("le dernier matin",
-                "test2.txt"), 0.001);
+    public void testSearch() {
+        Map<String, Float> relevantDocuments = mQuery.search("le dernier matin");
+
+        for (Map.Entry<String, Float> document : relevantDocuments.entrySet()) {
+            System.out.println(document.getKey() + " : " + document.getValue());
+        }
     }
 }
