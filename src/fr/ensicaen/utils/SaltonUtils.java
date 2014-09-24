@@ -7,7 +7,7 @@ import java.util.Map;
 public class SaltonUtils {
 	public static String getSaltonPartialCoef(Map<String,Map<String,Float>> index){
 		String res="";
-		//pre-computation during index building of left-term of the salton coefficient's denominator
+		//pre-computation during index building of left-term (without the square root) of the salton coefficient's denominator
 		//
 		for(String doc:index.keySet()){
 			float sum=0;
@@ -15,7 +15,7 @@ public class SaltonUtils {
 				float value=index.get(doc).get(word).floatValue();
 				sum+=value*value;
 			}
-			res+=doc+"\t"+Math.sqrt(sum)+"\n";
+			res+=doc+"\t"+sum+"\n";
 		}
 		return res;
 	}

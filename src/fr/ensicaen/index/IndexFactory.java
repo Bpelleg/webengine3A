@@ -3,21 +3,35 @@
  */
 package fr.ensicaen.index;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import fr.ensicaen.utils.FileUtils;
 
 /**
  * @author pellegrini
  *
  */
 public class IndexFactory {
+	private Set<String> antidico;
+	
 	/**
 	 * 
 	 */
 	public IndexFactory(){
-		
+		antidico=new HashSet<String>();
+		try {
+			String antidicosContent=FileUtils.readWholeFileUTF8("./antidico/antidico.txt");
+			antidico.addAll(Arrays.asList( antidicosContent.split("\n")));
+		} catch (IOException e) {
+			antidico=null;
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -71,8 +85,10 @@ public class IndexFactory {
 	}
 
 	private boolean isValid(String word) {
-		// TODO Auto-generated method stub
 		if(word.length()<3){
+			return false;
+		}
+		if(antidico.contains(word)){
 			return false;
 		}
 		return true;
