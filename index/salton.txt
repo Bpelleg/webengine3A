@@ -1,0 +1,10 @@
+Chevaux_de_bois.txt	1454.4993
+Cauchemar.txt	424.4016
+Nevermore.txt	334.97147
+Apres_trois_ans.txt	331.80905
+Monsieur_Prudhomme.txt	459.18533
+Ecoutez_la_chanson_bien_douce.txt	590.13495
+Chanson_pour_elles.txt	436.19037
+A_la_promenade.txt	395.7927
+Va_chanson_a_tire_d_aile.txt	241.91675
+Chanson_d_automne.txt	144.92253

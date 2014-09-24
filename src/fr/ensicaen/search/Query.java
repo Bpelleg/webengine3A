@@ -124,10 +124,19 @@ public class Query {
     private float computeDenominator(String document) {
         float sum = 0f;
 
-        sum += mVector.size() * mVector.size();
+        for(String word:mVector) {
+            float r=computeWordPond(word);
+            sum += r*r;
+        }
+
         sum *= mPartial.get(document);
 
         return (float) Math.sqrt(sum);
+    }
+
+    private float computeWordPond(String word) {
+        // TODO improve this method as an optimization
+        return 1;
     }
 
     @Override
