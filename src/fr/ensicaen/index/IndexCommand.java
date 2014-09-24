@@ -20,18 +20,29 @@ public class IndexCommand {
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
 		List<File> files=new ArrayList<File>();
-		System.out.println("Please enter one file or folder to index by line");
-		System.out.println("To launch the indexation, enter run");
-		String path="";
-		do{
-			path=sc.nextLine();
-			File file=new File(path);
-			if(file.isFile()){
-				files.add(file);
-			}else if(file.isDirectory()){
-				files.addAll(Arrays.asList(file.listFiles()));
-			}			
-		}while(!path.equalsIgnoreCase("run"));
+		if(args.length==0){
+			System.out.println("Please enter one file or folder to index by line");
+			System.out.println("To launch the indexation, enter run");
+			String path="";
+			do{
+				path=sc.nextLine();
+				File file=new File(path);
+				if(file.isFile()){
+					files.add(file);
+				}else if(file.isDirectory()){
+					files.addAll(Arrays.asList(file.listFiles()));
+				}			
+			}while(!path.equalsIgnoreCase("run"));
+		}else{
+			for(String filesPath:args){
+				File file=new File(filesPath);
+				if(file.isFile()){
+					files.add(file);
+				}else if(file.isDirectory()){
+					files.addAll(Arrays.asList(file.listFiles()));
+				}	
+			}
+		}
 		System.out.println("Construction of the index in progress ...");
 		IndexFactory indexBuilder=new IndexFactory();
 		Map<String,String> fileContents=new HashMap<String,String>();
