@@ -13,6 +13,7 @@ package fr.ensicaen.search;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -132,5 +133,21 @@ public class Query {
     @Override
     public String toString() {
         return mTextQuery;
+    }
+
+    class ValueComparator implements Comparator<Float> {
+        Map<String, Float> mBase;
+
+        public ValueComparator(Map<String, Float> base) {
+            mBase = base;
+        }
+
+        public int compare(Float a, Float b) {
+            if (mBase.get(a) >= mBase.get(b)) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
     }
 }

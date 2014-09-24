@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package fr.ensicaen.index;
 
@@ -14,22 +14,22 @@ import java.util.Map;
  */
 public class IndexFactory {
 	/**
-	 * 
+	 *
 	 */
 	public IndexFactory(){
-		
+
 	}
 
 	/**
-	 * 
+	 *
 	 * @param filesContents Map : name -> content
 	 */
-	
+
 	public Index buildIndex(Map<String,String> files){
 		Map<String,Map<String,Float>> indexMap=new HashMap<String,Map<String,Float>>();
 		Map<String,Integer> wordOccurencesInFiles=new HashMap<String,Integer>();
 		int nbFiles=files.keySet().size();
-		
+
 		for(String doc:files.keySet()){
 			String fileContent=files.get(doc);
 			Map<String,Float> docIndex=new HashMap<String,Float>();
@@ -44,7 +44,7 @@ public class IndexFactory {
 					docIndex.put(word, docIndex.get(word)+1);
 				}
 			}
-			
+
 			for(String word:docIndex.keySet()){
 				//update wordOccurrencesInFiles (dfi)
 				if(!wordOccurencesInFiles.containsKey(word)){
@@ -52,7 +52,7 @@ public class IndexFactory {
 				}
 				wordOccurencesInFiles.put(word, wordOccurencesInFiles.get(word)+1);
 			}
-			
+
 			// at this step the scores are the number of words' occurences in the file
 		indexMap.put(doc, docIndex);
 		}
@@ -71,17 +71,17 @@ public class IndexFactory {
 	}
 
 	private boolean isValid(String word) {
-		// TODO Auto-generated method stub
 		if(word.length()<3){
 			return false;
 		}
+
 		return true;
 	}
-	
+
 	private float tfIdf(float tfi,int N, int dfi){
 		float log=(float) Math.log(((double)N)/((double)dfi));
 		return tfi*log;
 	}
-	
+
 
 }
