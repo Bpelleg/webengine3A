@@ -34,7 +34,7 @@ public class IndexHandler {
 		try{
 			initializeFromString(strIndex);
 		}catch(ParseException e){
-			//TODO handle this exception
+			e.printStackTrace();
 		}
 	}
 
