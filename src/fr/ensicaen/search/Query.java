@@ -78,6 +78,11 @@ public class Query {
         numerator = computeNumerator(document);
         denominator = computeDenominator(document);
 
+        // Word not present in the query.
+        if (denominator == 0) {
+            return 0;
+        }
+
         return numerator / denominator;
     }
 
@@ -124,7 +129,7 @@ public class Query {
     private float computeDenominator(String document) {
         float sum = 0f;
 
-        for(String word:mVector) {
+        for(String word : mVector) {
             float r=computeWordPond(word);
             sum += r*r;
         }
@@ -142,21 +147,5 @@ public class Query {
     @Override
     public String toString() {
         return mTextQuery;
-    }
-
-    class ValueComparator implements Comparator<Float> {
-        Map<String, Float> mBase;
-
-        public ValueComparator(Map<String, Float> base) {
-            mBase = base;
-        }
-
-        public int compare(Float a, Float b) {
-            if (mBase.get(a) >= mBase.get(b)) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
     }
 }
