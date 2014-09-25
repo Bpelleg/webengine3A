@@ -143,20 +143,4 @@ public class Query {
     public String toString() {
         return mTextQuery;
     }
-
-    class ValueComparator implements Comparator<Float> {
-        Map<String, Float> mBase;
-
-        public ValueComparator(Map<String, Float> base) {
-            mBase = base;
-        }
-
-        public int compare(Float a, Float b) {
-            if (mBase.get(a) >= mBase.get(b)) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
-    }
 }
