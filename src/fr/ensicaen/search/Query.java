@@ -78,6 +78,11 @@ public class Query {
         numerator = computeNumerator(document);
         denominator = computeDenominator(document);
 
+        // Word not present in the query.
+        if (denominator == 0) {
+            return 0;
+        }
+
         return numerator / denominator;
     }
 
@@ -124,7 +129,7 @@ public class Query {
     private float computeDenominator(String document) {
         float sum = 0f;
 
-        for(String word:mVector) {
+        for(String word : mVector) {
             float r=computeWordPond(word);
             sum += r*r;
         }

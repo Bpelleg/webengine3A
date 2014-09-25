@@ -37,10 +37,14 @@ public class Search {
         indexHandler.initializeFromString(indexContent);
         Index index = indexHandler.getIndex();
         Query query = new Query(index);
-        Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter request : ");
-        Map<String, Float> relevantDocuments = query.search(sc.nextLine());
+        String request = "";
+
+        for (int i = 0; i < args.length; ++i) {
+            request += args[i] + " ";
+        }
+
+        Map<String, Float> relevantDocuments = query.search(request);
 
         @SuppressWarnings("unchecked")
         TreeSet sortedDocuments = new TreeSet(new Comparator() {
@@ -63,7 +67,5 @@ public class Search {
             Map.Entry myMapEntry = (Map.Entry) it.next();
             System.out.println(myMapEntry.getKey() + " : " + myMapEntry.getValue());
         }
-
-        sc.close();
     }
 }
