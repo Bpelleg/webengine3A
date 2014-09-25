@@ -4,6 +4,12 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * class in charge of the salton coefficient's terms
+ * that can be found during the index' construction
+ * @author pellegrini and marguerite
+ *
+ */
 public class SaltonUtils {
 	public static String getSaltonPartialCoef(Map<String,Map<String,Float>> index){
 		String res="";

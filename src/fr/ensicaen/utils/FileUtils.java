@@ -13,7 +13,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * class that saves or opens a text file
+ * @author pellegrini and marguerite
+ *
+ */
 public class FileUtils {
 	/**
 	 * this method is used to read the index from the filesystem

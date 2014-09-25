@@ -2,7 +2,11 @@ package fr.ensicaen.index;
 
 import java.util.Map;
 
-
+/**
+ * this class contains the representation of the index
+ * @author pellegrini and marguerite
+ *
+ */
 public class Index {
 		private Map<String,Map<String,Float>> index;
 		private int nbDoc;

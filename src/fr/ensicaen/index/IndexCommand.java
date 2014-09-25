@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,12 +14,18 @@ import java.util.Scanner;
 import fr.ensicaen.utils.FileUtils;
 import fr.ensicaen.utils.SaltonUtils;
 
+/**
+ * main class of the index construction program
+ * @author pellegrini and marguerite
+ *
+ */
 public class IndexCommand {
 
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
 		List<File> files=new ArrayList<File>();
 		if(args.length==0){
+			//dialog interface
 			System.out.println("Please enter one file or folder to index by line");
 			System.out.println("To launch the indexation, enter run");
 			String path="";
@@ -34,6 +39,7 @@ public class IndexCommand {
 				}			
 			}while(!path.equalsIgnoreCase("run"));
 		}else{
+			//command line interface
 			for(String filesPath:args){
 				File file=new File(filesPath);
 				if(file.isFile()){
@@ -61,10 +67,8 @@ public class IndexCommand {
 			FileUtils.writeFile("./index/index.txt", indexHandler.getStrIndex(), "UTF-8");
 			FileUtils.writeFile("./index/salton.txt", SaltonUtils.getSaltonPartialCoef(indexHandler.getIndex().getIndexMap()), "UTF-8");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("DONE");

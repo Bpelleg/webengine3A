@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author pellegrini
+ * class responsible for the serialization and de-serialization of the Index
+ * @author pellegrini and marguerite
  *
  */
 public class IndexHandler {
@@ -38,6 +39,10 @@ public class IndexHandler {
 		}
 	}
 
+	/**
+	 * serialize the index
+	 * @return
+	 */
 	public String getStrIndex(){
 		String output="";
 		for (String doc : index.keySet()) {
@@ -50,6 +55,11 @@ public class IndexHandler {
 		return output;
 	}
 
+	/**
+	 * load the index from a String
+	 * @param strIndex
+	 * @throws ParseException
+	 */
 	public void initializeFromString(String strIndex) throws ParseException{
 		String[] lines=strIndex.split("\n");
 		nbDoc=lines.length;

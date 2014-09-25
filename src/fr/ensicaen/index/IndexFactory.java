@@ -14,15 +14,13 @@ import java.util.Set;
 import fr.ensicaen.utils.FileUtils;
 
 /**
- * @author pellegrini
+ * class in charge of the index' construction
+ * @author pellegrini and marguerite
  *
  */
 public class IndexFactory {
 	private Set<String> antidico;
 
-	/**
-	 *
-	 */
 	public IndexFactory(){
 		antidico=new HashSet<String>();
 		try {
@@ -35,7 +33,7 @@ public class IndexFactory {
 	}
 
 	/**
-	 *
+	 * method that constructs the index
 	 * @param filesContents Map : name -> content
 	 */
 
@@ -84,6 +82,11 @@ public class IndexFactory {
 		return index;
 	}
 
+	/**
+	 * check whether the given word is meaningful or not
+	 * @param word
+	 * @return
+	 */
 	private boolean isValid(String word) {
 		if(word.length()<3){
 			return false;
@@ -94,6 +97,13 @@ public class IndexFactory {
 		return true;
 	}
 
+	/**
+	 * computation of the TF-IDF
+	 * @param tfi
+	 * @param N
+	 * @param dfi
+	 * @return
+	 */
 	private float tfIdf(float tfi,int N, int dfi){
 		float log=(float) Math.log(((double)N)/((double)dfi));
 		return tfi*log;
